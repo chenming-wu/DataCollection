@@ -1,0 +1,183 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="static/semantic.css"/>
+    <script type="text/javascript" src="static/jquery-2.2.2.js"></script>
+    <script type="text/javascript" src="static/semantic.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/components/grid.min.css">
+    <link rel="stylesheet" type="text/css" href="static/components/message.min.css">
+    <link rel="stylesheet" type="text/css" href="static/components/icon.min.css">
+    <link rel="stylesheet" type="text/css" href="static/components/progress.min.css">
+    <script type="text/javascript" src="static/components/progress.min.js"></script>
+    <title>Welcome</title>
+    <style type="text/css">
+      body {
+        background-color: aliceblue
+      }
+      .pics {
+        background-color: white
+      }
+      .dimmer.choose_me {
+        background-color: rgba(0,130,0,0.4) !important;
+      }
+      .dimmer.discard_me {
+        background-color: rgba(200,0,0,0.4) !important;
+      }
+      .invisible {
+        z-index: 100000;
+        width: 40%;
+        height: 30%;
+        position: absolute;
+        top: 35%;
+        left: 30%;  
+        color: black;
+      }
+      .param {
+        padding-top:2px;
+        padding-bottom:2px
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ui container">
+      <div class="ui grid">
+        <div class="ui row"></div>
+        <div class="ui row centered">
+          <div class="ui eight wide column">
+            <div class="ui teal progress active" data-percent="{{progress}}">
+              <div class="bar"></div>
+              <div class="label">group {{group}}: {{progress}}%</div>
+            </div>
+          </div>
+        </div>
+        <div class="ui row">
+          <div class="ui one wide column"></div>
+          <div class="ui six wide column pics left_part">
+            <a href="javascript:choose_left();"><div class="invisible left_trigger"></div></a>
+            <div class="ui grid">
+<!--              {% for image in left_images %}-->
+<!--              <div class="ui eight wide column"><img class="ui fluid image" src="static/images/{{image}}"/></div>-->
+<!--              {% endfor %}-->
+              <div class="ui eight wide column"><img class="ui fluid image" src="static/images/{{left_id}}.0.jpg"/></div>
+              <div class="ui eight wide column"><img class="ui fluid image" src="static/images/{{left_id}}.1.jpg"/></div>
+              <div class="ui eight wide column"><img class="ui fluid image" src="static/images/{{left_id}}.2.jpg"/></div>
+              <div class="ui eight wide column"><img class="ui fluid image" src="static/images/{{left_id}}.3.jpg"/></div>
+            </div>
+            <div class="ui dimmer choose_me">
+              <div class="content">
+                <div class="center">
+                  <h2 class="ui inverted icon header">
+                    <i class="checkmark icon"></i>
+                      I like this!
+                  </h2>
+                </div>
+              </div>
+            </div>
+            <div class="ui dimmer discard_me">
+              <div class="content">
+                <div class="center">
+                  <h2 class="ui inverted icon header">
+                    <i class="remove icon"></i>
+                      Poor...
+                  </h2>
+                </div>
+              </div>
+            </div>
+            <div class="column">
+              <div class="ui vertical fluid menu">
+                {% for name, value in params_right %}
+                <div class='item'>{{name}}: <i class="thumbs {{value}} icon"></i></div>
+                {% endfor %}
+              </div>
+            </div>
+<!--             <div class='ui sixteen wide column'>
+              {% for name, value in params_right %}
+              <div class='ui row param'><div class='ui label large'>{{name}}: <i class="thumbs {{value}} icon"></i></div></div>
+              {% endfor %}
+            </div> -->
+          </div>
+          <div class="ui two wide column"></div>
+          <div class="ui six wide column pics right_part">
+            <a href="javascript:choose_right();"><div class="invisible right_trigger"></div></a>
+            <div class="ui grid">
+              <div class="ui eight wide column"><img class="ui fluid image" src="static/images/{{right_id}}.0.jpg"/></div>
+              <div class="ui eight wide column"><img class="ui fluid image" src="static/images/{{right_id}}.1.jpg"/></div>
+              <div class="ui eight wide column"><img class="ui fluid image" src="static/images/{{right_id}}.2.jpg"/></div>
+              <div class="ui eight wide column"><img class="ui fluid image" src="static/images/{{right_id}}.3.jpg"/></div>
+            </div>
+            <div class="ui dimmer choose_me">
+              <div class="content">
+                <div class="center">
+                  <h2 class="ui inverted icon header">
+                    <i class="checkmark icon"></i>
+                      I like this!
+                  </h2>
+                </div>
+              </div>
+            </div>
+            <div class="ui dimmer discard_me">
+              <div class="content">
+                <div class="center">
+                  <h2 class="ui inverted icon header">
+                    <i class="remove icon"></i>
+                      Poor...
+                  </h2>
+                </div>
+              </div>
+            </div>
+            <div class="column">
+              <div class="ui vertical fluid menu">
+                {% for name, value in params_left %}
+                <div class='item'>{{name}}: <i class="thumbs {{value}} icon"></i></div>
+                {% endfor %}
+              </div>
+            </div>
+<!-- 
+            <div class='ui eight wide column centered grid'>
+              {% for name, value in params_left %}
+              <div class='ui row param'><div class='ui label big'>{{name}}: <i class="thumbs {{value}} icon"></i></div></div>
+              {% endfor %}
+            </div> -->
+          </div>
+          <div class="ui one wide column"></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      
+      $(document).ready(function () {
+        $('.dimmer').dimmer({
+//          closable: false,
+        }); 
+        $('.progress').progress();
+      });
+      $('.left_trigger').hover(
+        function(){
+          $('.left_part .dimmer.choose_me').dimmer('show');
+          $('.right_part .dimmer.discard_me').dimmer('show');
+        },
+        function(){
+          $('.left_part .dimmer.choose_me').dimmer('hide');
+          $('.right_part .dimmer.discard_me').dimmer('hide');
+        });
+      $('.right_trigger').hover(
+        function(){
+          $('.right_part .dimmer.choose_me').dimmer('show');
+          $('.left_part .dimmer.discard_me').dimmer('show');
+        },
+        function(){
+          $('.right_part .dimmer.choose_me').dimmer('hide');
+          $('.left_part .dimmer.discard_me').dimmer('hide');
+        });
+      var left_id = '{{left_id}}';
+      var right_id = '{{right_id}}';
+      function choose_left() {
+        $.post('/choose', {left:left_id, right:right_id, choice: left_id}, function(data, status){window.location.href='/'}); 
+      }
+      function choose_right() {
+        $.post('/choose', {left:left_id, right:right_id, choice: right_id}, function(data, status){window.location.href='/'});
+      }
+      $('.up.icon').addClass('green');
+      $('.down.icon').addClass('red');
+    </script>
+  </body>
+</html>

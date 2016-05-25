@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="static/semantic.css"/>
+    <link rel="stylesheet" type="text/css" href="static/components/grid.min.css">
+    <link rel="stylesheet" type="text/css" href="static/components/message.min.css">
+    <link rel="stylesheet" type="text/css" href="static/components/icon.min.css">
+    <title>Welcome</title>
+    <style type="text/css">
+      body {
+        background-color: aliceblue
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ui container grid">
+      <div class="ui middle aligned column centered twelve wide grid">
+        <div class="row"></div>
+        <div class="row">
+          <div clas="column grid">
+            <div class="ui text container segment blue">
+              <h1 class="ui header">Welcome to participant our 3D-Printing-Oriented Decomposition Algorithms experiments!</h1>
+            </div>
+          </div>
+        </div>
+        <div class="row"></div>
+        <div class="row">
+          <div class="ui ten wide column grid">
+            <div class="ui icon message">
+              <i class="info icon blue"></i>
+              <div class="content">
+                <p><font size="4"><b>Please enter a name (must >3 characters) to login.</b></font></p>
+              </div>
+            </div>
+            <div class="row middle aligned centered">
+              <div class="ui action input small left icon">
+                <form  class="ui action input small left icon" action='/login' method='post'>
+                  <i class="user icon"></i>
+                  <input type="text" name="name" placeholder="Your Name">
+                  <button class="ui button blue" type="submit">LOGIN</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </body>
+</html>
