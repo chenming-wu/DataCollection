@@ -128,13 +128,18 @@ def index():
     params_left = []
     params_right = []
     for i, pname in enumerate(param_name):
+        # params_left.append((pname, get_param(pair[1])[i],get_param(pair[1])[i]))
+        # params_right.append((pname, get_param(pair[0])[i],get_param(pair[1])[i]))
+        params_left.append((pname, get_param(pair[1])[i]))
+        params_right.append((pname, get_param(pair[0])[i]))
+        '''
         if get_param(pair[0])[i] > get_param(pair[1])[i]:
             params_left.append((pname, 'up'))
-            params_right.append((pname, 'down'))
+            params_right.append((pname, 'down')) 
         else:
             params_left.append((pname, 'down'))
             params_right.append((pname, 'up'))
-
+		'''
     print params_left, params_right
     return render_template('index.html', left_id=pair[0], right_id=pair[1], 
             group = userlist[name] / group_num + 1,

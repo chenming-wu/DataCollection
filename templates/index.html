@@ -38,20 +38,21 @@
     </style>
   </head>
   <body>
+
+  <div class="ui inverted teal vertical segment">
+      <div class="ui page grid">
+      <div class="column">
+        <h2 class="ui inverted teal header">3D-Printing oriented algorithms evaluation</h2>
+        <p>Data collection system</p>
+      </div>
+    </div>
+  </div>
+
     <div class="ui container">
-      <div class="ui grid">
+      <div class="ui stackable grid">
         <div class="ui row"></div>
-        <div class="ui row centered">
-          <div class="ui eight wide column">
-            <div class="ui teal progress active" data-percent="{{progress}}">
-              <div class="bar"></div>
-              <div class="label">group {{group}}: {{progress}}%</div>
-            </div>
-          </div>
-        </div>
         <div class="ui row">
-          <div class="ui one wide column"></div>
-          <div class="ui six wide column pics left_part">
+          <div class="ui left floated six wide column pics left_part">
             <a href="javascript:choose_left();"><div class="invisible left_trigger"></div></a>
             <div class="ui grid">
 <!--              {% for image in left_images %}-->
@@ -85,7 +86,16 @@
             <div class="column">
               <div class="ui vertical fluid menu">
                 {% for name, value in params_right %}
-                <div class='item'>{{name}}: <i class="thumbs {{value}} icon"></i></div>
+                <div class='item'><b>{{name}}</b> (value = {{value}})&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {% if value > params_left[loop.index - 1][1] %}  
+                  <i class="thumbs down icon"></i>
+                  <a class="ui red label"> {{(100 * (value - params_left[loop.index - 1][1]) / params_left[loop.index - 1][1])|round(2,'floor')}} % </a>
+                  
+                {% else %}
+                  <i class="thumbs up icon"></i>
+                  <a class="ui green label">{{(100 * (params_left[loop.index - 1][1] - value) / value)|round(2,'floor')}} %</a>
+                {% endif %}
+                </div>
                 {% endfor %}
               </div>
             </div>
@@ -95,8 +105,28 @@
               {% endfor %}
             </div> -->
           </div>
-          <div class="ui two wide column"></div>
-          <div class="ui six wide column pics right_part">
+
+          <!-- structural introduction -->
+          <div class="ui three wide column">
+              <br><br>
+              <div class="ui grid">
+              <div class="ui raised segment">
+              <a class="ui red ribbon label">Notice</a>
+              <span><b>Stress/Strain map</b></span>
+              <div class="ui sixteen wide column"><img class="ui fluid image" src="static/images/Bunny.jpg"/></div>
+              <br>
+              <p>
+                <b>Explaniation:</b><br>
+                We use Finite Element Method (FEM) to simulate real-world dropping cases. In our experiments,
+                we randomly selected sixteen directions to drop the 3D printed model, the above figure shows
+                the stree/strain distribution on surface.
+              </p>
+              <div class="ui sixteen wide column"><img class="ui fluid image" src="static/images/color_map.png"/></div>
+              </div>
+              </div>
+          </div>
+          
+          <div class="ui right floated six wide column pics right_part">
             <a href="javascript:choose_right();"><div class="invisible right_trigger"></div></a>
             <div class="ui grid">
               <div class="ui eight wide column"><img class="ui fluid image" src="static/images/{{right_id}}.0.jpg"/></div>
@@ -127,7 +157,16 @@
             <div class="column">
               <div class="ui vertical fluid menu">
                 {% for name, value in params_left %}
-                <div class='item'>{{name}}: <i class="thumbs {{value}} icon"></i></div>
+                <div class='item'><b>{{name}}</b> (value = {{value}})&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {% if value > params_right[loop.index - 1][1] %}  
+                  <i class="thumbs down icon"></i>
+                  <a class="ui red label"> {{(100 * (value - params_right[loop.index - 1][1]) / params_right[loop.index - 1][1])|round(2,'floor')}} % </a>
+                  
+                {% else %}
+                  <i class="thumbs up icon"></i>
+                  <a class="ui green label">{{(100 * (params_right[loop.index - 1][1] - value) / value)|round(2,'floor')}} %</a>
+                {% endif %}
+                </div>
                 {% endfor %}
               </div>
             </div>
@@ -138,8 +177,16 @@
               {% endfor %}
             </div> -->
           </div>
-          <div class="ui one wide column"></div>
         </div>
+          <div class="ui row centered">
+            <div class="ui eight wide column">
+              <div class="ui blue progress active" data-percent="{{progress}}">
+                <div class="bar"></div>
+                <div class="label">You are in Group[{{group}}]: No. {{progress}}/10</div>
+              </div>
+            </div>
+        </div>
+
       </div>
     </div>
     <script>
