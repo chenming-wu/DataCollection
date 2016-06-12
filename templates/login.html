@@ -18,26 +18,40 @@
         <div class="row">
           <div clas="column grid">
             <div class="ui text container segment blue">
-              <h1 class="ui header">Welcome to participant our 3D-Printing-Oriented Decomposition Algorithms experiments!</h1>
+              <h2 class="ui header">Welcome to participant our 3D-Printing-Oriented Decomposition Algorithms experiments!</h1>
             </div>
           </div>
         </div>
         <div class="row"></div>
         <div class="row">
           <div class="ui ten wide column grid">
-            <div class="ui icon message">
-              <i class="info icon blue"></i>
-              <div class="content">
-                <p><font size="4"><b>Please enter a name (must >3 characters) to login.</b></font></p>
-              </div>
-            </div>
-            <div class="row middle aligned centered">
-              <div class="ui action input small left icon">
-                <form  class="ui action input small left icon" action='/login' method='post'>
-                  <i class="user icon"></i>
-                  <input type="text" name="name" placeholder="Your Name">
-                  <button class="ui button blue" type="submit">LOGIN</button>
+
+
+            <div class="ui middle aligned center aligned grid">
+              <div class="column">
+                <div class="ui icon message">
+                <i class="info icon teal"></i>
+                  <div class="content">
+                    <p><font size="4"><b>Please enter a name (>3 characters) to login.</b></font></p>
+                  </div>
+                </div>
+                <form class="ui large form" action='/login' method='post'>
+                  <div class="ui stacked segment">
+                    <div class="field">
+                      <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input type="text" name="name" placeholder="Enter your name">
+                      </div>
+                    </div>
+                    <button class="ui button teal" type="submit">Login</button>
+                  </div>
+                  <div class="ui error message"></div>
+
                 </form>
+
+                <div class="ui message">
+                  Any question? <a href="mailto:wcm_94@163.com">Contact us</a>
+                </div>
               </div>
             </div>
           </div>

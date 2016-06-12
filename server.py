@@ -127,11 +127,12 @@ def index():
 
     params_left = []
     params_right = []
+
     for i, pname in enumerate(param_name):
         # params_left.append((pname, get_param(pair[1])[i],get_param(pair[1])[i]))
         # params_right.append((pname, get_param(pair[0])[i],get_param(pair[1])[i]))
-        params_left.append((pname, get_param(pair[1])[i]))
-        params_right.append((pname, get_param(pair[0])[i]))
+        params_left.append((pname, get_param(pair[1])[i+1]))
+        params_right.append((pname, get_param(pair[0])[i+1]))
         '''
         if get_param(pair[0])[i] > get_param(pair[1])[i]:
             params_left.append((pname, 'up'))
@@ -140,12 +141,15 @@ def index():
             params_left.append((pname, 'down'))
             params_right.append((pname, 'up'))
 		'''
+
     print params_left, params_right
     return render_template('index.html', left_id=pair[0], right_id=pair[1], 
             group = userlist[name] / group_num + 1,
             progress= (userlist[name] % group_num * 6 + group_num - 1) / group_num,
             params_left = params_left,
-            params_right = params_right)
+            params_right = params_right,
+            nb_left = get_param(pair[0])[0],
+            nb_right = get_param(pair[1])[0])
 
 def log_choice(name, a, b): #choice a over b
     print name, a, b
@@ -179,6 +183,12 @@ def login():
     response.set_cookie('name', name)
     return response
 
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+    flash('You were logged out')
+    return render_template('login.html')
+
 @app.route('/clear')
 def clear():
     response = make_response(redirect(url_for('index')))
@@ -199,4 +209,4 @@ if __name__ == '__main__':
     parser.add_argument('--debug', action='store_true')
     args = parser.parse_args()
 
-    app.run(host='0.0.0.0',port=5555, debug=args.debug, threaded=True)
+    app.run(host='0.0.0.0',port=4321, debug=args.debug, threaded=True)

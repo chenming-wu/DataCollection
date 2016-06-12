@@ -3,10 +3,13 @@
     <link rel="stylesheet" type="text/css" href="static/semantic.css"/>
     <script type="text/javascript" src="static/jquery-2.2.2.js"></script>
     <script type="text/javascript" src="static/semantic.js"></script>
+    <!-- <script type="text/javascript" src="static/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="static/jquery.SuperSlide.2.1.1.js"></script>--> 
     <link rel="stylesheet" type="text/css" href="static/components/grid.min.css">
     <link rel="stylesheet" type="text/css" href="static/components/message.min.css">
     <link rel="stylesheet" type="text/css" href="static/components/icon.min.css">
     <link rel="stylesheet" type="text/css" href="static/components/progress.min.css">
+
     <script type="text/javascript" src="static/components/progress.min.js"></script>
     <title>Welcome</title>
     <style type="text/css">
@@ -38,12 +41,12 @@
     </style>
   </head>
   <body>
-
   <div class="ui inverted teal vertical segment">
       <div class="ui page grid">
       <div class="column">
         <h2 class="ui inverted teal header">3D-Printing oriented algorithms evaluation</h2>
         <p>Data collection system</p>
+        </div>
       </div>
     </div>
   </div>
@@ -54,14 +57,53 @@
         <div class="ui row">
           <div class="ui left floated six wide column pics left_part">
             <a href="javascript:choose_left();"><div class="invisible left_trigger"></div></a>
+            <div class="ui label">
+              <i class="puzzle icon large"></i> <font size="3">{{nb_left}}&nbsp;&nbsp;parts</font>
+            </div>
             <div class="ui grid">
 <!--              {% for image in left_images %}-->
 <!--              <div class="ui eight wide column"><img class="ui fluid image" src="static/images/{{image}}"/></div>-->
 <!--              {% endfor %}-->
+
+<!-- <div class="ui one wide column">
+        <div class="banner-box">
+<div class="bd">
+        <ul>                
+            <li style="background:#F3E5D8;">
+                <div class="m-width">
+                <a href="javascript:void(0);"><img src="static/images/img1.jpg" /></a>
+                </div>
+            </li>
+            <li style="background:#B01415">
+                <div class="m-width">
+                <a href="javascript:void(0);"><img src="static/images/img2.jpg" /></a>
+                </div>
+            </li>
+            <li style="background:#C49803;">
+                <div class="m-width">
+                <a href="javascript:void(0);"><img src="static/images/img3.jpg" /></a>
+                </div>
+            </li>
+            <li style="background:#FDFDF5">
+                <div class="m-width">
+                <a href="javascript:void(0);"><img src="static/images/img4.jpg" /></a>
+                </div>
+            </li>  
+         
+        </ul>
+    </div>
+    <div class="banner-btn">
+        <a class="prev" href="javascript:dasdvoid(0);"></a>
+        <a class="next" href="javascript:daddasvoid(0);"></a>
+        <div class="hd"><ul></ul></div>
+    </div>
+</div>
+</div> -->
               <div class="ui eight wide column"><img class="ui fluid image" src="static/images/{{left_id}}.0.jpg"/></div>
               <div class="ui eight wide column"><img class="ui fluid image" src="static/images/{{left_id}}.1.jpg"/></div>
               <div class="ui eight wide column"><img class="ui fluid image" src="static/images/{{left_id}}.2.jpg"/></div>
               <div class="ui eight wide column"><img class="ui fluid image" src="static/images/{{left_id}}.3.jpg"/></div>
+
             </div>
             <div class="ui dimmer choose_me">
               <div class="content">
@@ -83,21 +125,39 @@
                 </div>
               </div>
             </div>
+
             <div class="column">
-              <div class="ui vertical fluid menu">
-                {% for name, value in params_right %}
-                <div class='item'><b>{{name}}</b> (value = {{value}})&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                {% if value > params_left[loop.index - 1][1] %}  
-                  <i class="thumbs down icon"></i>
-                  <a class="ui red label"> {{(100 * (value - params_left[loop.index - 1][1]) / params_left[loop.index - 1][1])|round(2,'floor')}} % </a>
-                  
-                {% else %}
-                  <i class="thumbs up icon"></i>
-                  <a class="ui green label">{{(100 * (params_left[loop.index - 1][1] - value) / value)|round(2,'floor')}} %</a>
-                {% endif %}
+             <div class="ui move reveal">
+              <div class="visible content">
+                <div class="ui vertical fluid menu">
+                  {% for name, value in params_right %}
+                  <div class='item'><b>{{name}}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <i class = "question icon"></i>
+                 
+                  </div>
+                  {% endfor %}
                 </div>
-                {% endfor %}
+                </div>
+              <div class="hidden content">
+                  <div class="ui vertical fluid menu">
+                  {% for name, value in params_right %}
+                  <div class='item'><b>{{name}}</b> (value = {{value}})&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  {% if value > params_left[loop.index - 1][1] %}  
+                    <i class="thumbs down icon"></i>
+                    <a class="ui red label"> {{(100 * (value - params_left[loop.index - 1][1]) / params_left[loop.index - 1][1])|round(2,'floor')}} % </a>
+                    
+                  {% else %}
+                    <i class="thumbs up icon"></i>
+                    <a class="ui green label">{{(100 * (params_left[loop.index - 1][1] - value) / value)|round(2,'floor')}} %</a>
+                  {% endif %}
+                  </div>
+                  {% endfor %}
+                </div>
               </div>
+            </div>
             </div>
 <!--             <div class='ui sixteen wide column'>
               {% for name, value in params_right %}
@@ -108,26 +168,30 @@
 
           <!-- structural introduction -->
           <div class="ui three wide column">
-              <br><br>
+              <br>
               <div class="ui grid">
               <div class="ui raised segment">
               <a class="ui red ribbon label">Notice</a>
               <span><b>Stress/Strain map</b></span>
-              <div class="ui sixteen wide column"><img class="ui fluid image" src="static/images/Bunny.jpg"/></div>
+              <div class="ui sixteen wide column"><img class="ui fluid image" src="static/images/Armadillo.jpg"/></div>
               <br>
               <p>
-                <b>Explaniation:</b><br>
-                We use Finite Element Method (FEM) to simulate real-world dropping cases. In our experiments,
-                we randomly selected sixteen directions to drop the 3D printed model, the above figure shows
-                the stree/strain distribution on surface.
+                <p align="center"><b>Explaniation</b></p>
+                We adopt Finite Element Method (FEM) to simulate real-world dropping cases. In our experiments,
+                sixteen directions were randomly picked to drop the 3D printed model, the above figure shows
+                the stress/strain distribution on surface.
               </p>
               <div class="ui sixteen wide column"><img class="ui fluid image" src="static/images/color_map.png"/></div>
+              <td><div style="float:left;"><i class="pointing up icon"></i>SAFE</div><div style="float:right;">UNSAFE<i class="pointing up icon"></i></div></td>
               </div>
               </div>
           </div>
           
           <div class="ui right floated six wide column pics right_part">
             <a href="javascript:choose_right();"><div class="invisible right_trigger"></div></a>
+            <div class="ui label">
+              <i class="puzzle icon large"></i> <font size="3">{{nb_right}}&nbsp;&nbsp;parts</font>
+            </div>
             <div class="ui grid">
               <div class="ui eight wide column"><img class="ui fluid image" src="static/images/{{right_id}}.0.jpg"/></div>
               <div class="ui eight wide column"><img class="ui fluid image" src="static/images/{{right_id}}.1.jpg"/></div>
@@ -155,6 +219,21 @@
               </div>
             </div>
             <div class="column">
+             <div class="ui move right reveal">
+              <div class="visible content">
+                <div class="ui vertical fluid menu">
+                  {% for name, value in params_right %}
+                  <div class='item'><b>{{name}}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <i class = "question icon"></i>
+                 
+                  </div>
+                  {% endfor %}
+                </div>
+                </div>
+              <div class="hidden content">
               <div class="ui vertical fluid menu">
                 {% for name, value in params_left %}
                 <div class='item'><b>{{name}}</b> (value = {{value}})&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -168,6 +247,8 @@
                 {% endif %}
                 </div>
                 {% endfor %}
+              </div>
+              </div>
               </div>
             </div>
 <!-- 
@@ -196,7 +277,11 @@
 //          closable: false,
         }); 
         $('.progress').progress();
+
+
+
       });
+
       $('.left_trigger').hover(
         function(){
           $('.left_part .dimmer.choose_me').dimmer('show');
@@ -225,6 +310,7 @@
       }
       $('.up.icon').addClass('green');
       $('.down.icon').addClass('red');
+      $('.')
     </script>
   </body>
 </html>
