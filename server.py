@@ -14,7 +14,7 @@ params = {}
 max_people = 6
 max_group  = 1
 
-param_name = ["Supporting volume", "Sturcture soundness", "Interface strength", "Boundary smooth","Volume distribution", "Surface roughness", "Concavity value", "Saliency value"]
+param_name = ["Supporting volume", "Sturcture soundness", "Interface strength", "Boundary smooth","Volume distribution", "Surface roughness", "Concavity value", "Saliency value","Smooth value"]
 
 # 24 people * 600 = (3 * 800) * 6
 # 4 stages, each 600 pics
