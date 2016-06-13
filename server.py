@@ -97,7 +97,7 @@ def new_user(user):
         return
     data = [[x, y] for x, y in groupdata[x]]
     random.seed(user)
-    random.shuffle(data)
+    #random.shuffle(data)
     datalist[user] = data
     userlist[user] = 0
     with open(os.path.join('userdata', user+'.txt'), 'w') as f:
@@ -148,8 +148,8 @@ def index():
             progress= (userlist[name] % group_num * 6 + group_num - 1) / group_num,
             params_left = params_left,
             params_right = params_right,
-            nb_left = get_param(pair[0])[0],
-            nb_right = get_param(pair[1])[0])
+            nb_left = int(get_param(pair[0])[0]),
+            nb_right = int(get_param(pair[1])[0]))
 
 def log_choice(name, a, b): #choice a over b
     print name, a, b
@@ -203,7 +203,7 @@ if __name__ == '__main__':
     datalist = load_datalist()
     group    = load_group('group.txt')
     print group
-    params   = load_data_params('../data')
+    params   = load_data_params('data')
     
     parser = argparse.ArgumentParser()
     parser.add_argument('--debug', action='store_true')
